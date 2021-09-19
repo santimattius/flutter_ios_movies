@@ -1,0 +1,71 @@
+import 'package:flutter_ios_movies/the_movie_db/data/models/original_language.dart';
+import 'package:flutter_ios_movies/the_movie_db/domain/entities/movie.dart';
+
+class MovieModel extends Movie {
+  MovieModel({
+    required adult,
+    required backdropPath,
+    required genreIds,
+    required id,
+    required originalLanguage,
+    required originalTitle,
+    required overview,
+    required popularity,
+    required posterPath,
+    required releaseDate,
+    required title,
+    required video,
+    required voteAverage,
+    required voteCount,
+  }) : super(
+            adult: adult,
+            backdropPath: backdropPath,
+            genreIds: genreIds,
+            id: id,
+            originalLanguage: originalLanguage,
+            originalTitle: originalTitle,
+            overview: overview,
+            popularity: popularity,
+            posterPath: posterPath,
+            releaseDate: releaseDate,
+            title: title,
+            video: video,
+            voteAverage: voteAverage,
+            voteCount: voteCount);
+
+  factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
+        adult: json["adult"],
+        backdropPath: json["backdrop_path"],
+        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
+        id: json["id"],
+        originalLanguage: originalLanguageValues
+            .map[json["original_language"]] ??= OriginalLanguage.EN,
+        originalTitle: json["original_title"],
+        overview: json["overview"],
+        popularity: json["popularity"].toDouble(),
+        posterPath: json["poster_path"],
+        releaseDate: DateTime.parse(json["release_date"]),
+        title: json["title"],
+        video: json["video"],
+        voteAverage: json["vote_average"].toDouble(),
+        voteCount: json["vote_count"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "adult": adult,
+        "backdrop_path": backdropPath,
+        "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
+        "id": id,
+        "original_language": originalLanguageValues.reverse[originalLanguage],
+        "original_title": originalTitle,
+        "overview": overview,
+        "popularity": popularity,
+        "poster_path": posterPath,
+        "release_date":
+            "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
+        "title": title,
+        "video": video,
+        "vote_average": voteAverage,
+        "vote_count": voteCount,
+      };
+}
