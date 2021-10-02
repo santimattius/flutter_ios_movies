@@ -5,7 +5,7 @@ import 'package:flutter_ios_movies/the_movie_db/data/models/tvshow_page_response
 import 'package:http/http.dart' as http;
 
 abstract class TvShowRemoteDataSource {
-  /// Calls the https://api.themoviedb.org/3/movie/popular endpoint.
+  /// Calls the https://api.themoviedb.org/3/tv/popular endpoint.
   ///
   /// Throws a [ServerException] for all error codes.
   Future<List<TvShowModel>> getPopularTvShows();
@@ -18,8 +18,13 @@ class TvShowRemoteDataSourceImpl extends TheMovieDBDataSource
 
   @override
   Future<List<TvShowModel>> getPopularTvShows() async {
-    return tvShowPageFromJson(
-            await fetch(endpoint: 'tv/popular', queryParams: {}))
+    return _getTvShows(endpoint: 'tv/popular', queryParams: {});
+  }
+
+  Future<List<TvShowModel>> _getTvShows(
+      {required String endpoint,
+      required Map<String, String> queryParams}) async {
+    return tvShowPageFromJson(await fetch(endpoint: endpoint, queryParams: {}))
         .results;
   }
 }

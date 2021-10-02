@@ -10,7 +10,6 @@ String tvShowToJson(TvShowModel data) => json.encode(data.toJson());
 class TvShowModel extends TvShow {
   TvShowModel({
     required backdropPath,
-    required firstAirDate,
     required genreIds,
     required id,
     required name,
@@ -24,7 +23,6 @@ class TvShowModel extends TvShow {
     required voteCount,
   }) : super(
             backdropPath: backdropPath,
-            firstAirDate: firstAirDate,
             genreIds: genreIds,
             id: id,
             name: name,
@@ -40,9 +38,6 @@ class TvShowModel extends TvShow {
   factory TvShowModel.fromJson(Map<String, dynamic> json) => TvShowModel(
         backdropPath:
             json["backdrop_path"] == null ? null : json["backdrop_path"],
-        firstAirDate: json["first_air_date"] == null
-            ? null
-            : DateTime.parse(json["first_air_date"]),
         genreIds: json["genre_ids"] == null
             ? null
             : List<int>.from(json["genre_ids"].map((x) => x)),
@@ -68,9 +63,6 @@ class TvShowModel extends TvShow {
 
   Map<String, dynamic> toJson() => {
         "backdrop_path": backdropPath == null ? null : backdropPath,
-        "first_air_date": firstAirDate == null
-            ? null
-            : "${firstAirDate.year.toString().padLeft(4, '0')}-${firstAirDate.month.toString().padLeft(2, '0')}-${firstAirDate.day.toString().padLeft(2, '0')}",
         "genre_ids": genreIds == null
             ? null
             : List<dynamic>.from(genreIds.map((x) => x)),

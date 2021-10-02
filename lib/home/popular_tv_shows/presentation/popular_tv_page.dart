@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ios_movies/home/popular_tv_shows/presentation/bloc/popular_tv_shows_bloc.dart';
+import 'package:flutter_ios_movies/injection_container.dart';
 import 'package:flutter_ios_movies/shared/presentation/base_page.dart';
 import 'package:flutter_ios_movies/shared/presentation/widgets/loading_widget.dart';
 import 'package:flutter_ios_movies/shared/presentation/widgets/message_display.dart';
 import 'package:flutter_ios_movies/the_movie_db/domain/entities/tv_show.dart';
 
-import '../../../injection_container.dart';
 
 class PopularTvPage extends BaseCupertinoPage {
   const PopularTvPage({

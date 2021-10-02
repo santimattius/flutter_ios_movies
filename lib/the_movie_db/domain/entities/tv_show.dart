@@ -1,7 +1,6 @@
 class TvShow {
   TvShow({
     required this.backdropPath,
-    required this.firstAirDate,
     required this.genreIds,
     required this.id,
     required this.name,
@@ -16,7 +15,6 @@ class TvShow {
   });
 
   final String backdropPath;
-  final DateTime firstAirDate;
   final List<int> genreIds;
   final int id;
   final String name;

@@ -9,6 +9,8 @@ abstract class MoviesRemoteDataSource {
   ///
   /// Throws a [ServerException] for all error codes.
   Future<List<MovieModel>> getPopularMovies();
+
+  Future<List<MovieModel>> getUpComingMovies();
 }
 
 class MoviesRemoteDataSourceImpl extends TheMovieDBDataSource
@@ -21,20 +23,15 @@ class MoviesRemoteDataSourceImpl extends TheMovieDBDataSource
     return _getMovies(endpoint: 'movie/popular', queryParams: {});
   }
 
+  @override
+  Future<List<MovieModel>> getUpComingMovies() async {
+    return _getMovies(endpoint: 'movie/upcoming', queryParams: {});
+  }
+
   Future<List<MovieModel>> _getMovies(
       {required String endpoint,
       required Map<String, String> queryParams}) async {
-    queryParams['api_key'] = 'ee6fa3652297841e02d5808229a45d6d';
-    final url = Uri.https(BASE_URL, '/3/$endpoint', queryParams);
-    final response =
-        await client.get(url, headers: {'Content-Type': 'application/json'});
-
-    if (response.statusCode == 200) {
-      return moviePageFromJson(response.body).results;
-    } else {
-      throw ServerException();
-    }
+    return moviePageFromJson(await fetch(endpoint: endpoint, queryParams: {}))
+        .results;
   }
-
-  static const BASE_URL = "api.themoviedb.org";
 }

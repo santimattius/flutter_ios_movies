@@ -2,6 +2,8 @@ import 'package:flutter_ios_movies/home/popular_movies/domain/get_popular_movies
 import 'package:flutter_ios_movies/home/popular_movies/presentation/bloc/popular_movies_bloc.dart';
 import 'package:flutter_ios_movies/home/popular_tv_shows/domain/get_popular_tv_shows.dart';
 import 'package:flutter_ios_movies/home/popular_tv_shows/presentation/bloc/popular_tv_shows_bloc.dart';
+import 'package:flutter_ios_movies/home/upcoming/movies/domain/get_upcoming_movies.dart';
+import 'package:flutter_ios_movies/home/upcoming/movies/presentation/bloc/up_coming_movies_bloc.dart';
 import 'package:flutter_ios_movies/shared/network/network_info.dart';
 import 'package:flutter_ios_movies/the_movie_db/data/datasources/movies_remote_data_source.dart';
 import 'package:flutter_ios_movies/the_movie_db/data/datasources/tv_show_remote_data_source.dart';
@@ -24,8 +26,12 @@ Future<void> init() async {
   sl.registerFactory<PopularTvShowsBloc>(
     () => PopularTvShowsBloc(getPopularTvShows: sl()),
   );
+  sl.registerFactory<UpComingMoviesBloc>(
+    () => UpComingMoviesBloc(getUpComingMovies: sl()),
+  );
   // Use cases
   sl.registerLazySingleton(() => GetPopularMovies(sl()));
+  sl.registerLazySingleton(() => GetUpComingMovies(sl()));
   sl.registerLazySingleton(() => GetPopularTvShows(sl()));
 
   // Repository

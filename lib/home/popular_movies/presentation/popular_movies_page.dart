@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ios_movies/detail/movie/presentation/movie_detail_page.dart';
 import 'package:flutter_ios_movies/home/popular_movies/presentation/bloc/popular_movies_bloc.dart';
 import 'package:flutter_ios_movies/injection_container.dart';
 import 'package:flutter_ios_movies/shared/presentation/base_page.dart';
@@ -56,16 +57,20 @@ class PopularMoviesPage extends BaseCupertinoPage {
   GridView gridView(final List<Movie> movies) {
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.67
-        ),
+            crossAxisCount: 2, childAspectRatio: 0.67),
         itemCount: movies.length,
         itemBuilder: (BuildContext context, int index) {
           final movie = movies[index];
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.network(
-                "https://image.tmdb.org/t/p/w500${movie.posterPath}"),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(CupertinoPageRoute(
+                    builder: (context) => MovieDetailPage(movie)));
+              },
+              child: Image.network(
+                  "https://image.tmdb.org/t/p/w500${movie.posterPath}"),
+            ),
           );
         });
   }
