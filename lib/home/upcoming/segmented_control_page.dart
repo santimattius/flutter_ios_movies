@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_ios_movies/home/upcoming/movies/presentation/up_comming_movies_page.dart';
+import 'package:flutter_ios_movies/home/upcoming/tvshows/presentation/up_comming_tv_shows_page.dart';
 
 class ComingSonRootPage extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _ComingSonRootPageState extends State<ComingSonRootPage> {
 
   final Map<int, Widget> icons = <int, Widget>{
     0: UpComingMoviesPage(),
-    1: UpComingMoviesPage(),
+    1: UpComingTvShowsPage(),
   };
 
   int sharedValue = 0;

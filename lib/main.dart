@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: HomePage(title: 'Flutter Demo Home Page'),
+      title: 'Flutter iOS Movies',
+      home: HomePage(),
     );
   }
 }

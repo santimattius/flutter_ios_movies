@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ios_movies/detail/tvshow/presentation/tv_show_detail_page.dart';
 import 'package:flutter_ios_movies/home/popular_tv_shows/presentation/bloc/popular_tv_shows_bloc.dart';
 import 'package:flutter_ios_movies/injection_container.dart';
 import 'package:flutter_ios_movies/shared/presentation/base_page.dart';
 import 'package:flutter_ios_movies/shared/presentation/widgets/loading_widget.dart';
 import 'package:flutter_ios_movies/shared/presentation/widgets/message_display.dart';
 import 'package:flutter_ios_movies/the_movie_db/domain/entities/tv_show.dart';
-
 
 class PopularTvPage extends BaseCupertinoPage {
   const PopularTvPage({
@@ -60,11 +60,17 @@ class PopularTvPage extends BaseCupertinoPage {
             crossAxisCount: 2, childAspectRatio: 0.67),
         itemCount: tvShows.length,
         itemBuilder: (BuildContext context, int index) {
-          final movie = tvShows[index];
+          final tvShow = tvShows[index];
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.network(
-                "https://image.tmdb.org/t/p/w500${movie.posterPath}"),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(CupertinoPageRoute(
+                    builder: (context) => TvShowDetailPage(tvShow)));
+              },
+              child: Image.network(
+                  "https://image.tmdb.org/t/p/w500${tvShow.posterPath}"),
+            ),
           );
         });
   }

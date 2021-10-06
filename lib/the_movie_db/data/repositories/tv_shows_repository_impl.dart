@@ -18,6 +18,11 @@ class TvShowsRepositoryImpl extends TvShowsRepository {
     return await _getTvShows(() => this.remoteDataSource.getPopularTvShows());
   }
 
+  @override
+  Future<Either<Failure, List<TvShow>>> getTopRated() async {
+    return await _getTvShows(() => this.remoteDataSource.getTopRatedTvShows());
+  }
+
   Future<Either<Failure, List<TvShow>>> _getTvShows(
       Future<List<TvShow>> Function() call) async {
     if (await networkInfo.isConnected) {

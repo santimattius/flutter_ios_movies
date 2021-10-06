@@ -44,7 +44,27 @@ class PopularMoviesPage extends BaseCupertinoPage {
       return LoadingWidget();
     } else if (state is Loaded) {
       final movies = state.movies;
-      return gridView(movies);
+      return CustomScrollView(
+        slivers: [
+          CupertinoSliverRefreshControl(
+            onRefresh: () async {
+              return Future.delayed(Duration(seconds: 2), () {
+                BlocProvider.of<PopularMoviesBloc>(context)
+                    .add(GetMoviesEvent());
+              });
+            },
+          ),
+          SliverGrid(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, childAspectRatio: 0.67),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final movie = movies[index];
+              return movieItem(context, movie);
+            }, childCount: movies.length),
+          ),
+        ],
+      );
+      //return gridView(movies);
     } else if (state is Error) {
       return MessageDisplay(
         message: state.message,
@@ -61,17 +81,21 @@ class PopularMoviesPage extends BaseCupertinoPage {
         itemCount: movies.length,
         itemBuilder: (BuildContext context, int index) {
           final movie = movies[index];
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(CupertinoPageRoute(
-                    builder: (context) => MovieDetailPage(movie)));
-              },
-              child: Image.network(
-                  "https://image.tmdb.org/t/p/w500${movie.posterPath}"),
-            ),
-          );
+          return movieItem(context, movie);
         });
+  }
+
+  Padding movieItem(BuildContext context, Movie movie) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+              CupertinoPageRoute(builder: (context) => MovieDetailPage(movie)));
+        },
+        child:
+            Image.network("https://image.tmdb.org/t/p/w500${movie.posterPath}"),
+      ),
+    );
   }
 }

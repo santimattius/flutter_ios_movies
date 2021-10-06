@@ -3,37 +3,18 @@ import 'package:flutter_ios_movies/home/upcoming/shared/presentation/up_coming_u
 
 class UpComingItem extends StatelessWidget {
   final UpComingModel model;
+  final Function onTap;
 
-  const UpComingItem({Key? key, required this.model}) : super(key: key);
+  const UpComingItem({Key? key, required this.model, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: GestureDetector(
-        onTap: () => {
-          showCupertinoDialog<void>(
-            context: context,
-            builder: (BuildContext context) => CupertinoAlertDialog(
-              title: const Text('Alert'),
-              content: const Text('Proceed with destructive action?'),
-              actions: <CupertinoDialogAction>[
-                CupertinoDialogAction(
-                  child: const Text('No'),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                CupertinoDialogAction(
-                  child: const Text('Yes'),
-                  isDestructiveAction: true,
-                  onPressed: () {
-                    // Do something destructive.
-                  },
-                )
-              ],
-            ),
-          )
+        onTap: () {
+          onTap();
         },
         child: Container(
           child: Row(
@@ -56,15 +37,20 @@ class UpComingItem extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(model.title),
-                          const Padding(padding: EdgeInsets.only(top: 8)),
+                          Text(
+                            model.title,
+                            style: TextStyle(
+                                fontSize: 18.0, fontWeight: FontWeight.bold),
+                          ),
+                          const Padding(padding: EdgeInsets.only(top: 8.0)),
                           Text(
                             model.description,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 5,
                           ),
-                          const Padding(padding: EdgeInsets.only(top: 8)),
-                          Text("Date: ${model.releaseDate}"),
+                          const Padding(padding: EdgeInsets.only(top: 16.0)),
+                          Text(
+                              "${model.releaseDate == "" ? "" : "Date: ${model.releaseDate}"}"),
                         ],
                       )),
                 ),

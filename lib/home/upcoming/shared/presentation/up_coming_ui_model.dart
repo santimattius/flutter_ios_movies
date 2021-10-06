@@ -2,7 +2,11 @@ class UpComingModel {
   final String title;
   final String description;
   final String image;
-  final String releaseDate;
+  String releaseDate;
 
-  UpComingModel(this.title, this.description, this.image, this.releaseDate);
+  UpComingModel(
+      {required this.title,
+      required this.description,
+      required this.image,
+      this.releaseDate = ""});
 }

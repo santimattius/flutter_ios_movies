@@ -14,5 +14,5 @@ class UpComingSonPage extends BaseCupertinoPage {
   }
 
   @override
-  String title() => 'Coming Son';
+  String title() => 'Up Coming';
 }

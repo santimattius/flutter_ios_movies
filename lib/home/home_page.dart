@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_ios_movies/shared/presentation/base_page.dart';
-import 'package:flutter_ios_movies/home/upcoming/comming_son_page.dart';
 import 'package:flutter_ios_movies/home/popular_movies/presentation/popular_movies_page.dart';
 import 'package:flutter_ios_movies/home/popular_tv_shows/presentation/popular_tv_page.dart';
+import 'package:flutter_ios_movies/home/upcoming/up_coming_page.dart';
+import 'package:flutter_ios_movies/shared/presentation/base_page.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -26,11 +24,12 @@ class _HomePageState extends State<HomePage> {
       tabBar: CupertinoTabBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.home), label: 'Movies'),
+              icon: Icon(CupertinoIcons.arrowtriangle_right_square),
+              label: 'Movies'),
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.heart), label: 'Tv Shows'),
+              icon: Icon(CupertinoIcons.tv), label: 'Tv shows'),
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.time), label: 'Coming Son'),
+              icon: Icon(CupertinoIcons.time), label: 'Up coming'),
         ],
       ),
       tabBuilder: (BuildContext context, int index) {

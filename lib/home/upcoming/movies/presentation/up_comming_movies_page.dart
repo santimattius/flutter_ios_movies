@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ios_movies/detail/movie/presentation/movie_detail_page.dart';
 import 'package:flutter_ios_movies/home/upcoming/movies/presentation/bloc/up_coming_movies_bloc.dart';
 import 'package:flutter_ios_movies/home/upcoming/shared/presentation/up_coming_ui_model.dart';
 import 'package:flutter_ios_movies/home/upcoming/shared/presentation/up_comping_item.dart';
@@ -54,10 +55,17 @@ class UpComingMoviesPage extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           final movie = movies[index];
           String releaseDateFormatted = _releaseDateFormatted(movie);
-          final model = UpComingModel(movie.title, movie.overview,
-              movie.posterPath, releaseDateFormatted);
+          final model = UpComingModel(
+              title: movie.title,
+              description: movie.overview,
+              image: movie.posterPath,
+              releaseDate: releaseDateFormatted);
           return UpComingItem(
             model: model,
+            onTap: () {
+              Navigator.of(context).push(CupertinoPageRoute(
+                  builder: (context) => MovieDetailPage(movie)));
+            },
           );
         });
   }

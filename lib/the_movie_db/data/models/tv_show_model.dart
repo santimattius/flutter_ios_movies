@@ -37,7 +37,7 @@ class TvShowModel extends TvShow {
 
   factory TvShowModel.fromJson(Map<String, dynamic> json) => TvShowModel(
         backdropPath:
-            json["backdrop_path"] == null ? null : json["backdrop_path"],
+            json["backdrop_path"] == null ? "" : json["backdrop_path"],
         genreIds: json["genre_ids"] == null
             ? null
             : List<int>.from(json["genre_ids"].map((x) => x)),

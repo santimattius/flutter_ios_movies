@@ -9,6 +9,11 @@ abstract class TvShowRemoteDataSource {
   ///
   /// Throws a [ServerException] for all error codes.
   Future<List<TvShowModel>> getPopularTvShows();
+
+  /// Calls the https://api.themoviedb.org/3/tv/top_rated endpoint.
+  ///
+  /// Throws a [ServerException] for all error codes.
+  Future<List<TvShowModel>> getTopRatedTvShows();
 }
 
 class TvShowRemoteDataSourceImpl extends TheMovieDBDataSource
@@ -19,6 +24,11 @@ class TvShowRemoteDataSourceImpl extends TheMovieDBDataSource
   @override
   Future<List<TvShowModel>> getPopularTvShows() async {
     return _getTvShows(endpoint: 'tv/popular', queryParams: {});
+  }
+
+  @override
+  Future<List<TvShowModel>> getTopRatedTvShows() {
+    return _getTvShows(endpoint: 'tv/top_rated', queryParams: {});
   }
 
   Future<List<TvShowModel>> _getTvShows(
