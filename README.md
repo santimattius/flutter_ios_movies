@@ -6,9 +6,9 @@ The following describes the architecture of the app, the structure of the projec
 
 <p align="left">
 
-  <img src="https://github.com/santimattius/flutter_ios_movies/blob/master/art/art_02.png?raw=true" alt="Project packages" width="300"/>
-  <img src="https://github.com/santimattius/flutter_ios_movies/blob/master/art/art_01.png?raw=true" alt="Project packages" width="300"/>
-  <img src="https://github.com/santimattius/flutter_ios_movies/blob/master/art/art_03.png?raw=true" alt="Project packages" width="300"/>
+  <img src="https://github.com/santimattius/flutter_ios_movies/blob/master/art/art_02.png?raw=true" alt="Project packages" width="200"/>
+  <img src="https://github.com/santimattius/flutter_ios_movies/blob/master/art/art_01.png?raw=true" alt="Project packages" width="200"/>
+  <img src="https://github.com/santimattius/flutter_ios_movies/blob/master/art/art_03.png?raw=true" alt="Project packages" width="200"/>
 </p>
 
 # Application architecture (bounded context)
